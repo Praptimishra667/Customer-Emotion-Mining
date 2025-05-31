@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <title>Customer Sentimental Analysis</title>
+
+  <!-- Font Awesome -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- jsPDF for PDF Export -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  <!-- Animate.css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #333;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    h2 {
+      color: #1c2d5a;
+    }
+    .navbar-nav .nav-link {
+      font-weight: 500;
+      color: #fff !important;
+    }
+    .btn-primary {
+      background-color: #1c2d5a;
+      border-color: #1c2d5a;
+    }
+    .btn-primary:hover {
+      background-color: #2a3c7c;
+      border-color: #2a3c7c;
+    }
+    .dark-mode {
+      background-color: #121212;
+      color: #f1f1f1;
+    }
+    .dark-mode .navbar {
+      background-color: #1c1c1c !important;
+    }
+    .dark-mode .form-control,
+    .dark-mode .form-check-label {
+      background-color: #1e1e1e;
+      color: #fff;
+    }
+    .dark-mode .btn-primary {
+      background-color: #3e3e3e;
+      border-color: #3e3e3e;
+    }
+    .view-mobile .col-md-6 {
+      flex: 0 0 100% !important;
+      max-width: 100% !important;
+    }
+    .view-desktop .col-md-6 {
+      flex: 0 0 50% !important;
+      max-width: 50% !important;
+    }
+    .switch-icons {
+      font-size: 1.2rem;
+      margin-left: 8px;
+      cursor: pointer;
+      color: #fff;
+    }
+  </style>
+</head>
+
+<body id="page-top" class="view-desktop">
+  <nav class="navbar navbar-expand-lg bg-secondary fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#page-top">
+        <img src="assets/img/pngegg (16).png" alt="Brand" height="40">
+      </a>
+      <button class="navbar-toggler text-white" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+        <span class="navbar-toggler-icon"><i class="fas fa-bars"></i></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto align-items-center">
+          <li class="nav-item"><a class="nav-link" href="#portfolio">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#about">Analytics</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Reports</a></li>
+          <li class="nav-item"><span class="switch-icons" id="themeToggle">🌙</span></li>
+          <li class="nav-item"><span class="switch-icons" id="viewToggle">🖥️</span></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <section class="page-section mt-5 pt-5" id="portfolio">
+    <div class="container text-center animate__animated animate__fadeIn">
+      <h2 class="page-section-heading text-uppercase text-secondary mb-4">Customer Sentimental Analysis</h2>
+      <div class="row">
+        <div class="col-md-6 mb-4">
+          <select id="sentimentSelector1" class="form-control mb-3">
+            <option value="textblob">TextBlob</option>
+            <option value="vader">VADER</option>
+          </select>
+          <canvas id="sentimentChart1"></canvas>
+          <div class="mt-3">
+            <button class="btn btn-secondary" onclick="exportChart(chart1, 'SentimentChart1')">Export PNG</button>
+            <button class="btn btn-secondary" onclick="exportPDF(chart1, 'SentimentChart1')">Export PDF</button>
+            <button class="btn btn-secondary" onclick="exportCSV(chart1, 'SentimentChart1')">Export CSV</button>
+          </div>
+        </div>
+        <div class="col-md-6 mb-4">
+          <select id="sentimentSelector2" class="form-control mb-3">
+            <option value="textblob">TextBlob</option>
+            <option value="vader">VADER</option>
+          </select>
+          <canvas id="sentimentChart2"></canvas>
+          <div class="mt-3">
+            <button class="btn btn-secondary" onclick="exportChart(chart2, 'SentimentChart2')">Export PNG</button>
+            <button class="btn btn-secondary" onclick="exportPDF(chart2, 'SentimentChart2')">Export PDF</button>
+            <button class="btn btn-secondary" onclick="exportCSV(chart2, 'SentimentChart2')">Export CSV</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page-section bg-light" id="contact">
+    <div class="container animate__animated animate__fadeInUp">
+      <h2 class="text-center text-uppercase text-secondary mb-4">Submit Feedback</h2>
+      <form>
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Your Name" required />
+        </div>
+        <div class="form-group">
+          <textarea class="form-control" rows="4" placeholder="Your Feedback..." required></textarea>
+        </div>
+        <div class="form-group">
+          <strong>How was your experience?</strong><br />
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="experience" value="satisfactory" required />
+            <label class="form-check-label">😊 Satisfactory</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="experience" value="neutral" />
+            <label class="form-check-label">😐 Neutral</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="experience" value="unsatisfactory" />
+            <label class="form-check-label">😞 Unsatisfactory</label>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg btn-block mt-3">Send</button>
+      </form>
+      <p class="text-center mt-3 text-muted">
+        For further queries, contact <strong>Prapti Mishra</strong> at
+        <a href="mailto:praptimishra977@gmail.com">praptimishra977@gmail.com</a>
+        or call <strong>+91 7735474929</strong>.
+      </p>
+    </div>
+  </section>
+
+  <footer class="footer text-center py-4">
+    <div class="container">
+      <small>&copy; 2025 Customer Insights Inc. All rights reserved.</small>
+    </div>
+  </footer>
+
+  <script>
+    const sentimentData = {
+      textblob: { labels: ["Satisfactory", "Neutral", "Unsatisfactory"], values: [45, 30, 25] },
+      vader: { labels: ["Satisfactory", "Neutral", "Unsatisfactory"], values: [50, 20, 30] }
+    };
+
+    function createChart(ctx, method) {
+      return new Chart(ctx, {
+        type: "pie",
+        data: {
+          labels: sentimentData[method].labels,
+          datasets: [{
+            data: sentimentData[method].values,
+            backgroundColor: ["#28a745", "#ffc107", "#dc3545"],
+            borderWidth: 2,
+            hoverOffset: 10
+          }]
+        },
+        options: {
+          responsive: true,
+          animation: {
+            duration: 1000,
+            easing: 'easeOutBounce'
+          },
+          plugins: {
+            legend: { position: "top" },
+            title: {
+              display: true,
+              text: `Customer Sentimental Distribution (${method.charAt(0).toUpperCase() + method.slice(1)})`
+            }
+          }
+        }
+      });
+    }
+
+    const chart1 = createChart(document.getElementById("sentimentChart1"), "textblob");
+    const chart2 = createChart(document.getElementById("sentimentChart2"), "vader");
+
+    document.getElementById("sentimentSelector1").addEventListener("change", e => {
+      const selected = e.target.value;
+      chart1.data.labels = sentimentData[selected].labels;
+      chart1.data.datasets[0].data = sentimentData[selected].values;
+      chart1.options.plugins.title.text = `Customer Sentimental Distribution (${selected.charAt(0).toUpperCase() + selected.slice(1)})`;
+      chart1.update();
+    });
+
+    document.getElementById("sentimentSelector2").addEventListener("change", e => {
+      const selected = e.target.value;
+      chart2.data.labels = sentimentData[selected].labels;
+      chart2.data.datasets[0].data = sentimentData[selected].values;
+      chart2.options.plugins.title.text = `Customer Sentimental Distribution (${selected.charAt(0).toUpperCase() + selected.slice(1)})`;
+      chart2.update();
+    });
+
+    function exportChart(chart, filename) {
+      const link = document.createElement("a");
+      link.href = chart.toBase64Image();
+      link.download = `${filename}.png`;
+      link.click();
+    }
+
+    async function exportPDF(chart, filename) {
+      const { jsPDF } = window.jspdf;
+      const pdf = new jsPDF();
+      const imageData = chart.toBase64Image();
+      pdf.text(filename, 10, 10);
+      pdf.addImage(imageData, 'PNG', 10, 20, 180, 120);
+      pdf.save(`${filename}.pdf`);
+    }
+
+    function exportCSV(chart, filename) {
+      const labels = chart.data.labels;
+      const values = chart.data.datasets[0].data;
+      let csv = "Category,Value\n";
+      labels.forEach((label, index) => {
+        csv += `${label},${values[index]}\n`;
+      });
+      const blob = new Blob([csv], { type: "text/csv" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `${filename}.csv`;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    document.getElementById("themeToggle").addEventListener("click", () => {
+      document.body.classList.toggle("dark-mode");
+      themeToggle.textContent = document.body.classList.contains("dark-mode") ? "☀️" : "🌙";
+    });
+
+    document.getElementById("viewToggle").addEventListener("click", () => {
+      const isDesktop = document.body.classList.contains("view-desktop");
+      document.body.classList.toggle("view-desktop", !isDesktop);
+      document.body.classList.toggle("view-mobile", isDesktop);
+      viewToggle.textContent = isDesktop ? "📱" : "🖥️";
+    });
+  </script>
+
+  <!-- Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
