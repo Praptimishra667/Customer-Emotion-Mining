@@ -85,3 +85,9 @@ To set up and run the project on your machine:
    ```bash
    git clone https://github.com/your-repo/customer-feedback-visualizer.git
    cd customer-feedback-visualizer
+
+2.**Install dependencies:**
+   ```bash
+   pip install -r requirements.txt --upgrade
+3.
+
