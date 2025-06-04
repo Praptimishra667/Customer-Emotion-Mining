@@ -1,94 +1,82 @@
-# Customer-Emotion-Mining
 # 💬 Customer Feedback Visualizer
 
-Harness the power of Natural Language Processing (NLP) to decode what customers are really saying! This project analyzes and visualizes customer feedback using advanced sentiment analysis techniques. By categorizing feedback into meaningful sentiment groups and showcasing them with interactive pie charts, it offers a visual insight into customer satisfaction trends.
+Harness the power of Natural Language Processing (NLP) to decode what customers are really saying!  
+This project analyzes and visualizes customer feedback using advanced sentiment analysis techniques.  
+By categorizing reviews into sentiment groups and visualizing them with interactive pie charts, it offers a quick, insightful look into customer satisfaction.
 
 ---
 
-## 🧭 Quick Navigation
+## 📸 Project Snapshots
 
-Jump into any section below to explore the project in detail:
+### 📝 Feedback Entry Interface
 
-- 🔍 [Project Snapshot](#project-snapshot)
-- 🎯 [Key Highlights](#key-highlights)
-- 🧰 [Tech Toolbox](#tech-toolbox)
-- 🔧 [Workflow Demystified](#workflow-demystified)
-- 🛠️ [Getting Started](#getting-started)
-- 🚀 [How to Use](#how-to-use)
-- 📈 [What You Get](#what-you-get)
-- 🙏 [Credits & Thanks](#credits--thanks)
 
----
+![Screenshot 2025-06-04 103347](https://github.com/user-attachments/assets/3d4f3b36-d389-4f6e-ad05-3b21b6e319ac)
 
-## 🔍 Project Snapshot
+### 📊 Sentiment Analysis Output
+![Screenshot 2025-06-04 103339](https://github.com/user-attachments/assets/94a46db9-92d1-4f61-a8ac-36a6dcba1353)
 
-The **Customer Feedback Visualizer** processes and classifies customer reviews using sentiment analysis tools like **TextBlob** and **VADER**, then visualizes those insights in clean, informative pie charts.
 
-Key capabilities include:
-- Intelligent text preprocessing using `spaCy`
-- Dual sentiment scoring via `TextBlob` and `VADER`
-- Classification into **Satisfactory**, **Neutral**, and **Unsatisfactory**
-- Exportable visual and CSV outputs for reporting
+
+> Replace `path-to-image/` with the actual image path in your repo or hosting location.
 
 ---
 
-## 🎯 Key Highlights
+## 🎯 Key Features
 
-✔️ **Synthetic Feedback Generator** – Produces 100 fake but realistic feedback entries  
-✔️ **Robust Preprocessing** – Clean and tokenize text via `spaCy`  
-✔️ **Dual Sentiment Engines** – Analyzes feedback using both `TextBlob` and `VADER`  
-✔️ **Intuitive Visualization** – Pie charts provide quick, impactful sentiment snapshots  
-✔️ **Export Options** – Save visualizations as PNG, PDF, or CSV for reports  
-
----
-
-## 🧰 Tech Toolbox
-
-This project integrates the following libraries and technologies:
-
-- 🐍 **Python 3.6+**
-- 📊 `pandas` – For data manipulation  
-- 🔍 `spaCy` – Text cleaning and preprocessing  
-- 🗨️ `TextBlob` – Polarity-based sentiment analysis  
-- 🧠 `VADER` – Rule-based sentiment analysis  
-- 🎨 `matplotlib` & `seaborn` – For static visualizations  
-- 🤖 `Faker` – Generate synthetic customer feedback  
+- 🔄 **Synthetic Feedback Generator**: Auto-generates 100 realistic feedback entries using `Faker`
+- 🧹 **Text Preprocessing**: Uses `spaCy` to clean and tokenize feedback
+- 📈 **Dual Sentiment Engines**: Analyzes sentiment using both **TextBlob** and **VADER**
+- 🍰 **Pie Chart Visualization**: Visually represent customer sentiment categories
+- 💾 **Export Support**: Easily save data and plots as CSV, PNG, or PDF
+- 🎛️ **Categorical Mapping**: Maps polarity and compound scores into `Satisfactory`, `Neutral`, or `Unsatisfactory`
 
 ---
 
-## 🔧 Workflow Demystified
+## 🧰 Tech Stack
 
-Here’s what happens behind the scenes:
-
-1. **Generate Synthetic Data**  
-   → Creates realistic fake reviews using `Faker` with columns like `CustomerID`, `Name`, and `FeedbackText`.
-
-2. **Preprocess Feedback**  
-   → Tokenization, punctuation removal, and stopword elimination using `spaCy`.
-
-3. **Perform Sentiment Analysis**  
-   → `TextBlob` calculates polarity; `VADER` computes compound scores.
-
-4. **Categorize Sentiment**  
-   → Maps numerical scores into qualitative labels: **Satisfactory**, **Neutral**, or **Unsatisfactory**.
-
-5. **Visualize Results**  
-   → Pie charts render the sentiment distribution clearly for both analyzers.
+| Component         | Technology          |
+|------------------|---------------------|
+| Language          | Python 3.6+         |
+| Text Preprocessing| spaCy              |
+| Sentiment Tools   | TextBlob, VADER     |
+| Data Generation   | Faker               |
+| Visualization     | matplotlib, seaborn |
+| Data Handling     | pandas              |
 
 ---
 
-## 🛠️ Getting Started
+## 🧠 How It Works
 
-To set up and run the project on your machine:
+### 1. **Generate Synthetic Data**
+- Uses `Faker` to simulate customer names, IDs, and realistic review text
 
-1. **Clone the Repository**
-   ```bash
-   git clone https://github.com/your-repo/customer-feedback-visualizer.git
-   cd customer-feedback-visualizer
+### 2. **Preprocess Feedback**
+- Removes punctuation, stopwords, and performs lemmatization using `spaCy`
 
-2.**Install dependencies:**
-   ```bash
-   pip install -r requirements.txt --upgrade
+### 3. **Analyze Sentiment**
+- `TextBlob` returns polarity scores (range: -1 to 1)
+- `VADER` returns compound scores (range: -1 to 1)
 
+### 4. **Map Sentiment Categories**
+- **TextBlob**:
+  - `> 0.2` → Satisfactory
+  - `-0.2 to 0.2` → Neutral
+  - `< -0.2` → Unsatisfactory
+- **VADER**:
+  - `> 0.05` → Satisfactory
+  - `-0.05 to 0.05` → Neutral
+  - `< -0.05` → Unsatisfactory
 
+### 5. **Visualize**
+- Generates comparative pie charts for both sentiment analyzers
 
+---
+
+## 🛠️ Installation & Setup
+
+### Step 1: Clone the Repository
+
+```bash
+git clone https://github.com/your-username/customer-feedback-visualizer.git
+cd customer-feedback-visualizer
