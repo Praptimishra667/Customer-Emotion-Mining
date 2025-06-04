@@ -16,6 +16,13 @@ By categorizing reviews into sentiment groups and visualizing them with interact
 ### 📊 Sentiment Analysis Output
 ![Screenshot 2025-06-04 103339](https://github.com/user-attachments/assets/94a46db9-92d1-4f61-a8ac-36a6dcba1353)
 
+[▶️ Watch Demo Video](https://your-host
+
+https://github.com/user-attachments/assets/ca3c1370-a1e3-4585-8d7f-2bcbefd99dea
+
+ing.com/video.mp4)
+
+
 
 
 > Replace `path-to-image/` with the actual image path in your repo or hosting location.
