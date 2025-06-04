@@ -16,11 +16,8 @@ By categorizing reviews into sentiment groups and visualizing them with interact
 ### 📊 Sentiment Analysis Output
 ![Screenshot 2025-06-04 103339](https://github.com/user-attachments/assets/94a46db9-92d1-4f61-a8ac-36a6dcba1353)
 
-[▶️ Watch Demo Video](https://your-host
+##[▶️ Watch Demo Video]
 
-
-
-ing.com/video.mp4)
 
 
 
