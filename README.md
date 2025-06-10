@@ -1,8 +1,6 @@
 # 💬 Customer Feedback Visualizer
 
-Harness the power of Natural Language Processing (NLP) to decode what customers are really saying!  
-This project analyzes and visualizes customer feedback using advanced sentiment analysis techniques.  
-By categorizing reviews into sentiment groups and visualizing them with interactive pie charts, it offers a quick, insightful look into customer satisfaction.
+This project leverages Natural Language Processing (NLP) to analyze and interpret customer feedback. Using rule-based tools like VADER and TextBlob for initial sentiment labeling, and a Bidirectional LSTM model for advanced sentiment classification, it effectively categorizes reviews into sentiment groups. The results are visualized through interactive pie charts, offering clear insights into customer satisfaction. The BiLSTM model achieved a test accuracy of 45% after training.
 
 ---
 
