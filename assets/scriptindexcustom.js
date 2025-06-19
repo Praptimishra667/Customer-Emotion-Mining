@@ -4,6 +4,10 @@ const sentimentData = {
   TrueSentiment: { labels: ["Satisfactory", "Neutral", "Unsatisfactory"], values: [45.7, 24.1, 30.2] }
 };
 
+function capitalize(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
 function createChart(ctx, method) {
   return new Chart(ctx, {
     type: "pie",
@@ -33,27 +37,12 @@ function createChart(ctx, method) {
   });
 }
 
-const chart1 = createChart(document.getElementById("sentimentChart1"), "textblob");
-const chart2 = createChart(document.getElementById("sentimentChart2"), "vader");
+// Initialize Charts
+const chartTrue = createChart(document.getElementById("sentimentChartTrue"), "TrueSentiment");
+const chartVader = createChart(document.getElementById("sentimentChartVader"), "vader");
+const chartTextBlob = createChart(document.getElementById("sentimentChartTextBlob"), "textblob");
 
-document.getElementById("sentimentSelector1").addEventListener("change", e => {
-  updateChart(chart1, e.target.value);
-});
-document.getElementById("sentimentSelector2").addEventListener("change", e => {
-  updateChart(chart2, e.target.value);
-});
-
-function updateChart(chart, method) {
-  chart.data.labels = sentimentData[method].labels;
-  chart.data.datasets[0].data = sentimentData[method].values;
-  chart.options.plugins.title.text = `Customer Sentiment Distribution (${capitalize(method)})`;
-  chart.update();
-}
-
-function capitalize(str) {
-  return str.charAt(0).toUpperCase() + str.slice(1);
-}
-
+// Export functions
 function exportChart(chart, filename) {
   const link = document.createElement("a");
   link.href = chart.toBase64Image();
@@ -86,14 +75,14 @@ function exportCSV(chart, filename) {
   URL.revokeObjectURL(url);
 }
 
-// 🌗 Theme Toggle - Light and Dark Mode
+// Theme Toggle
 document.getElementById("themeToggle").addEventListener("click", () => {
   document.body.classList.toggle("dark-mode");
   const icon = document.getElementById("themeToggle");
   icon.textContent = document.body.classList.contains("dark-mode") ? "☀️" : "🌙";
 });
 
-// 🖥️ View Toggle - Desktop and Mobile Layouts
+// View Mode Toggle
 document.getElementById("viewToggle").addEventListener("click", () => {
   document.body.classList.toggle("view-desktop");
   document.body.classList.toggle("view-mobile");
