@@ -1,6 +1,7 @@
 const sentimentData = {
-  textblob: { labels: ["Satisfactory", "Neutral", "Unsatisfactory"], values: [45, 30, 25] },
-  vader: { labels: ["Satisfactory", "Neutral", "Unsatisfactory"], values: [50, 20, 30] }
+  textblob: { labels: ["Satisfactory", "Neutral", "Unsatisfactory"], values: [79.4, 10.6, 10.0] },
+  vader: { labels: ["Satisfactory", "Neutral", "Unsatisfactory"], values: [85.4, 0, 14.6] },
+  TrueSentiment: { labels: ["Satisfactory", "Neutral", "Unsatisfactory"], values: [45.7, 24.1, 30.2] }
 };
 
 function createChart(ctx, method) {
