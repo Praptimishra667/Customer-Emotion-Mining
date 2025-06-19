@@ -1,90 +1,162 @@
-# 💬 Customer Feedback Visualizer
 
-This project leverages Natural Language Processing (NLP) to analyze and interpret customer feedback. Using rule-based tools like VADER and TextBlob for initial sentiment labeling, and a Bidirectional LSTM model for advanced sentiment classification, it effectively categorizes reviews into sentiment groups. The results are visualized through interactive pie charts, offering clear insights into customer satisfaction. The BiLSTM model achieved a test accuracy of 45% after training.
+# 🧠 Customer Emotion Mining using NLP & LSTM (Flipkart Reviews)
 
----
-
-## 📸 Project Snapshots
-
-### 📝 Feedback Entry Interface
-
-
-![Screenshot 2025-06-04 103347](https://github.com/user-attachments/assets/3d4f3b36-d389-4f6e-ad05-3b21b6e319ac)
-
-### 📊 Sentiment Analysis Output
-![Screenshot 2025-06-04 103339](https://github.com/user-attachments/assets/94a46db9-92d1-4f61-a8ac-36a6dcba1353)
-
-##[▶️ Watch Demo Video]
-
-
-
-
-
-
-https://github.com/user-attachments/assets/9bdc0a01-a467-4f59-b9bd-808d580fa871
-
-
-
-
-> Replace `path-to-image/` with the actual image path in your repo or hosting location.
+This project showcases an end-to-end machine learning pipeline for **emotion mining** from customer reviews. It begins with scraping user reviews from Flipkart, followed by text augmentation, sentiment analysis, NLP preprocessing, and finally classification using a deep LSTM model.
 
 ---
 
-## 🎯 Key Features
+## 📌 Overview
 
-- 🔄 **Synthetic Feedback Generator**: Auto-generates 100 realistic feedback entries using `Faker`
-- 🧹 **Text Preprocessing**: Uses `spaCy` to clean and tokenize feedback
-- 📈 **Dual Sentiment Engines**: Analyzes sentiment using both **TextBlob** and **VADER**
-- 🍰 **Pie Chart Visualization**: Visually represent customer sentiment categories
-- 💾 **Export Support**: Easily save data and plots as CSV, PNG, or PDF
-- 🎛️ **Categorical Mapping**: Maps polarity and compound scores into `Satisfactory`, `Neutral`, or `Unsatisfactory`
+The workflow is organized in two Jupyter notebooks:
 
----
+1. **`nlp.ipynb`**: Handles all NLP preprocessing steps after data collection – cleaning, tokenization, lemmatization, stopword removal, vocabulary creation, and padding.
 
-## 🧰 Tech Stack
-
-| Component         | Technology          |
-|------------------|---------------------|
-| Language          | Python 3.6+         |
-| Text Preprocessing| spaCy              |
-| Sentiment Tools   | TextBlob, VADER     |
-| Data Generation   | Faker               |
-| Visualization     | matplotlib, seaborn |
-| Data Handling     | pandas              |
+2. **`lstm (1).ipynb`**: Constructs and trains a neural network using Embedding + LSTM layers for emotion classification of customer reviews, including model evaluation and metrics visualization.
 
 ---
 
-## 🧠 How It Works
+## 🛒 Data Source
 
-### 1. **Generate Synthetic Data**
-- Uses `Faker` to simulate customer names, IDs, and realistic review text
-
-### 2. **Preprocess Feedback**
-- Removes punctuation, stopwords, and performs lemmatization using `spaCy`
-
-### 3. **Analyze Sentiment**
-- `TextBlob` returns polarity scores (range: -1 to 1)
-- `VADER` returns compound scores (range: -1 to 1)
-
-### 4. **Map Sentiment Categories**
-- **TextBlob**:
-  - `> 0.2` → Satisfactory
-  - `-0.2 to 0.2` → Neutral
-  - `< -0.2` → Unsatisfactory
-- **VADER**:
-  - `> 0.05` → Satisfactory
-  - `-0.05 to 0.05` → Neutral
-  - `< -0.05` → Unsatisfactory
-
-### 5. **Visualize**
-- Generates comparative pie charts for both sentiment analyzers
+- Reviews were extracted from **Flipkart** using web scraping techniques with Python.
+- Each review includes:
+  - Customer rating
+  - Review title
+  - Full comment
+- After scraping, data was **augmented** for balancing emotions like *happy, angry, neutral, sad*, etc., to improve model generalization.
 
 ---
 
-## 🛠️ Installation & Setup
+## 😊 Sentiment Analysis
 
-### Step 1: Clone the Repository
+Before training the LSTM model, customer reviews are analyzed using:
 
+- **VADER (Valence Aware Dictionary and sEntiment Reasoner)**
+- **TextBlob**
+
+These tools help derive initial **sentiment polarity (positive, negative, neutral)**. The results are visualized using:
+
+📊 **Pie Charts**  
+- Distribution of sentiment classes based on review texts  
+- Enables a clear view of customer emotion trends before classification
+
+---
+
+## ⚙️ How It Works
+
+### Step-by-Step Pipeline:
+
+1. **Web Scraping**:
+   - Data fetched using BeautifulSoup/requests or Selenium
+   - Stored in structured format (CSV / JSON)
+
+2. **Sentiment Analysis**:
+   - VADER and TextBlob applied to review texts
+   - Sentiment score thresholds used to classify text
+   - Pie charts generated to visualize sentiment distribution
+
+3. **Text Preprocessing (`nlp.ipynb`)**:
+   - Lowercasing, punctuation & digit removal
+   - Tokenization
+   - Stopword removal with `nltk`
+   - Lemmatization
+   - Vocabulary and token index generation
+   - Sentence padding to standard length
+
+4. **Modeling with LSTM (`lstm (1).ipynb`)**:
+   - Input: Tokenized padded sequences
+   - Layers:
+     - Embedding layer
+     - LSTM with dropout
+     - Dense + Softmax/Sigmoid for classification
+   - Output: Predicted emotion class
+
+---
+
+## 🚀 Tech Stack
+
+| Category        | Tools / Libraries        |
+|----------------|--------------------------|
+| Language        | Python 3.x               |
+| Scraping        | BeautifulSoup, requests  |
+| NLP Toolkit     | NLTK, TextBlob, VADER    |
+| Deep Learning   | TensorFlow, Keras        |
+| Visualization   | Matplotlib               |
+| Evaluation      | Scikit-learn             |
+
+---
+
+## 📊 Model Performance
+
+| Metric     | Value        |
+|------------|--------------|
+| Test Accuracy | **94.76%** ✅ |
+| Loss         | ~0.18        |
+| Optimizer    | Adam         |
+| Epochs       | 10           |
+
+> ✅ The LSTM model demonstrates excellent performance in mining customer emotions from Flipkart reviews.
+
+---
+
+## 🖼️ Screenshots
+
+> 📷 **Coming Soon**
+- Raw review examples from Flipkart
+- Sentiment pie chart (VADER/TextBlob)
+- Tokenization and padding preview
+- LSTM model summary and training curve
+
+---
+
+## 🎬 Demo Video
+
+> 🎥 **Coming Soon**
+- Full demo of the pipeline from scraping to classification
+
+---
+
+## 🧪 Installation & Running
+
+### 1. Clone the repository:
 ```bash
-git clone https://github.com/your-username/customer-feedback-visualizer.git
-cd customer-feedback-visualizer
+git clone https://github.com/your-username/flipkart-emotion-mining.git
+cd flipkart-emotion-mining
+```
+
+### 2. Install dependencies:
+```bash
+pip install -r requirements.txt
+```
+
+### 3. Run notebooks:
+Use Jupyter Notebook or any IDE to explore and execute:
+- `nlp.ipynb`
+- `lstm (1).ipynb`
+
+---
+
+## 📂 Folder Structure
+
+```
+.
+├── nlp.ipynb               # Text preprocessing & sentiment analysis
+├── lstm (1).ipynb          # LSTM model training and evaluation
+├── README.md               # Project documentation
+├── requirements.txt        # Python dependencies
+└── /data                   # (optional) Scraped and augmented review data
+```
+
+---
+
+## 👤 Author
+
+**Prapti Mishra**  
+📧 [Praptimishra977@gmail.com]
+
+---
+
+## 📄 License
+
+This project is open-source and available under the [MIT License](LICENSE).
+
+---
