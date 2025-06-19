@@ -8,20 +8,20 @@
   <!-- Font Awesome -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" defer></script>
 
-  <!-- Custom Styles -->
-  <link rel="stylesheet" href="styleindexcustom.css">
-
   <!-- Bootstrap CSS -->
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Animate.css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="styleindexcustom.css">
 
   <!-- Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
 
-  <!-- jsPDF for PDF Export -->
+  <!-- jsPDF -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
-
-  <!-- Animate.css -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 
   <!-- Custom Script -->
   <script src="scriptindexcustom.js" defer></script>
@@ -50,33 +50,38 @@
     </div>
   </nav>
 
-  <!-- Sentiment Analysis Section -->
+  <!-- Sentiment Charts -->
   <section class="page-section mt-5 pt-5" id="portfolio">
     <div class="container text-center animate__animated animate__fadeIn">
       <h2 class="page-section-heading text-uppercase text-secondary mb-4">Customer Sentiment Analysis</h2>
       <div class="row">
-        <div class="col-md-6 mb-4">
-          <select id="sentimentSelector1" class="form-control mb-3">
-            <option value="textblob">TextBlob</option>
-            <option value="vader">VADER</option>
-          </select>
-          <canvas id="sentimentChart1"></canvas>
+        <!-- True Sentiment -->
+        <div class="col-md-4 mb-4">
+          <canvas id="sentimentChartTrue"></canvas>
           <div class="mt-3">
-            <button class="btn btn-secondary" onclick="exportChart(chart1, 'SentimentChart1')">Export PNG</button>
-            <button class="btn btn-secondary" onclick="exportPDF(chart1, 'SentimentChart1')">Export PDF</button>
-            <button class="btn btn-secondary" onclick="exportCSV(chart1, 'SentimentChart1')">Export CSV</button>
+            <button class="btn btn-secondary" onclick="exportChart(chartTrue, 'TrueSentiment')">Export PNG</button>
+            <button class="btn btn-secondary" onclick="exportPDF(chartTrue, 'TrueSentiment')">Export PDF</button>
+            <button class="btn btn-secondary" onclick="exportCSV(chartTrue, 'TrueSentiment')">Export CSV</button>
           </div>
         </div>
-        <div class="col-md-6 mb-4">
-          <select id="sentimentSelector2" class="form-control mb-3">
-            <option value="textblob">TextBlob</option>
-            <option value="vader">VADER</option>
-          </select>
-          <canvas id="sentimentChart2"></canvas>
+
+        <!-- VADER -->
+        <div class="col-md-4 mb-4">
+          <canvas id="sentimentChartVader"></canvas>
           <div class="mt-3">
-            <button class="btn btn-secondary" onclick="exportChart(chart2, 'SentimentChart2')">Export PNG</button>
-            <button class="btn btn-secondary" onclick="exportPDF(chart2, 'SentimentChart2')">Export PDF</button>
-            <button class="btn btn-secondary" onclick="exportCSV(chart2, 'SentimentChart2')">Export CSV</button>
+            <button class="btn btn-secondary" onclick="exportChart(chartVader, 'VADER')">Export PNG</button>
+            <button class="btn btn-secondary" onclick="exportPDF(chartVader, 'VADER')">Export PDF</button>
+            <button class="btn btn-secondary" onclick="exportCSV(chartVader, 'VADER')">Export CSV</button>
+          </div>
+        </div>
+
+        <!-- TextBlob -->
+        <div class="col-md-4 mb-4">
+          <canvas id="sentimentChartTextBlob"></canvas>
+          <div class="mt-3">
+            <button class="btn btn-secondary" onclick="exportChart(chartTextBlob, 'TextBlob')">Export PNG</button>
+            <button class="btn btn-secondary" onclick="exportPDF(chartTextBlob, 'TextBlob')">Export PDF</button>
+            <button class="btn btn-secondary" onclick="exportCSV(chartTextBlob, 'TextBlob')">Export CSV</button>
           </div>
         </div>
       </div>
@@ -126,10 +131,9 @@
     </div>
   </footer>
 
-  <!-- Bootstrap JS, Popper.js, and jQuery -->
+  <!-- Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
 </body>
 </html>
