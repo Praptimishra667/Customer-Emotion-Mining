@@ -28,13 +28,13 @@ h2 {
 }
 
 /* View Mode Toggle */
-.view-mobile .col-md-6 {
+.view-mobile .col-md-4 {
   flex: 0 0 100% !important;
   max-width: 100% !important;
 }
-.view-desktop .col-md-6 {
-  flex: 0 0 50% !important;
-  max-width: 50% !important;
+.view-desktop .col-md-4 {
+  flex: 0 0 33.3333% !important;
+  max-width: 33.3333% !important;
 }
 
 /* Toggle Icons */
@@ -93,26 +93,6 @@ body.dark-mode {
   border-radius: 10px;
 }
 
-.dark-mode .card,
-.dark-mode .modal-content,
-.dark-mode .dropdown-menu {
-  background-color: #1c1c1c;
-  color: #e0e0e0;
-}
-
-.dark-mode .table,
-.dark-mode .table th,
-.dark-mode .table td {
-  background-color: #1a1a1a;
-  color: #eee;
-}
-
 .dark-mode .switch-icons {
   color: #f1f1f1;
-}
-
-.dark-mode .chart-container {
-  background-color: #1a1a1a;
-  padding: 1rem;
-  border-radius: 10px;
 }
